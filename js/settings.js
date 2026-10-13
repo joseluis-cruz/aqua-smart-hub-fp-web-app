@@ -1,5 +1,5 @@
 (function () {
-  const storageKey = 'aquasmart-hub-fp-settings-v1';
+  const storageKey = 'aquasmart-hub-fp-settings-v2';
   const samplingOptions = [5, 10, 15, 30, 60];
   const defaults = {
     samplingMinutes: 15,
@@ -7,7 +7,7 @@
     thresholds: {
       temperature: { typical: [10, 25], warning: [7.5, 30], critical: [5, 35], unit: '°C', label: 'Temperatura' },
       ph: { typical: [7.5, 9], warning: [7, 9.5], critical: [6.5, 10], unit: '', label: 'pH' },
-      oxygen: { typical: [10, 100], warning: [5, null], critical: [3, null], unit: '%', label: 'Saturación de oxígeno' }
+      oxygen: { typical: [5, 9], warning: [5, null], critical: [3, null], unit: 'mg/L', label: 'Oxígeno disuelto' }
     }
   };
 
@@ -29,8 +29,8 @@
     const oxygen = settings.thresholds?.oxygen;
     if (!oxygen || !Array.isArray(oxygen.warning) || !Array.isArray(oxygen.critical)
         || !Number.isFinite(oxygen.warning[0]) || !Number.isFinite(oxygen.critical[0])
-        || !(0 <= oxygen.critical[0] && oxygen.critical[0] < oxygen.warning[0] && oxygen.warning[0] <= 100)) {
-      errors.push('En oxígeno, el mínimo crítico debe ser menor que el informativo y ambos deben estar entre 0 y 100 %.');
+        || !(0 <= oxygen.critical[0] && oxygen.critical[0] < oxygen.warning[0])) {
+      errors.push('En oxígeno, el mínimo crítico debe ser menor que el informativo y ambos deben ser positivos.');
     }
     if (!Array.isArray(settings.notificationEmails)
         || settings.notificationEmails.some(email => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))) {
