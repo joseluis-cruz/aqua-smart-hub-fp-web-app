@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07142d">
+  <title>AquaSmart Hub FP · Control de tanques</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/settings.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="AquaSmart Hub FP, inicio"><img class="brand-logo" src="assets/logo_proyecto.png" alt=""><span class="brand-name">Aqua<span class="brand-accent">Smart</span> Hub FP<small>CONTROL ACUÍCOLA</small></span></a>
+      <div class="side-label">ESPACIO DE TRABAJO</div>
+      <nav class="nav-list" aria-label="Secciones">
+        <a class="nav-item active" href="#inicio" aria-current="location"><span>▦</span> Vista general</a>
+        <a class="nav-item" href="#tanques"><span>◉</span> Tanques</a>
+        <a class="nav-item" href="#historial"><span>⌁</span> Historial</a>
+        <a class="nav-item" href="#alertas"><span>♧</span> Alertas <b id="nav-alert-count">0</b></a>
+        <a class="nav-item" href="#notificaciones"><span>✉</span> Notificaciones</a>
+        <a class="nav-item" href="config.html"><span>⚙</span> Configuración</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="online-dot"></span> Monitorización de tanques <small>Muestras cada <span data-sampling-minutes>15</span> minutos</small></div>
+    </aside>
+
+    <main id="inicio" class="main-content">
+      <header class="topbar"><div class="breadcrumb">Instalación / <strong>Panel de control</strong></div><div class="topbar-right"><span id="current-time" class="current-time"></span></div></header>
+      <div class="page-content">
+        <section class="welcome"><div><div class="eyebrow">PROYECTO DE INNOVACIÓN <span class="eyebrow-line"></span> MONITORIZACIÓN ACUÍCOLA</div><h1>Aqua<span>Smart</span> Hub FP</h1><p>Temperatura, pH y oxígeno de tanques, en un solo lugar.</p></div><img class="welcome-logo" src="assets/logo_proyecto.png" alt="" aria-hidden="true"></section>
+
+        <section class="overview" aria-label="Resumen de la instalación"><div class="section-heading"><div><span class="section-kicker">ESTADO EN TIEMPO REAL</span><h2>Resumen de la instalación</h2></div><span class="muted">Valores recibidos de las sondas</span></div><div id="summary-cards" class="summary-grid"></div></section>
+
+        <section id="tanques" class="tank-section"><div class="section-heading"><div><span class="section-kicker">SEGUIMIENTO POR TANQUE</span><h2>Selecciona un tanque</h2></div><span id="tank-count" class="count-label"></span></div><div id="tank-list" class="tank-grid" role="group" aria-label="Seleccionar tanque"></div></section>
+
+        <section id="historial" class="history-section"><div class="section-heading history-heading"><div><span class="section-kicker">EVOLUCIÓN DE VARIABLES</span><h2>Historial de <span id="selected-tank-name">tanque</span></h2><p class="section-subtitle">Muestras recabadas cada <span data-sampling-minutes>15</span> minutos · Líneas de alerta informativa y crítica.</p></div><div class="range-switch" role="group" aria-label="Periodo del historial"><button type="button" data-range="day" class="active" aria-pressed="true">Día</button><button type="button" data-range="week" aria-pressed="false">Semana</button><button type="button" data-range="month" aria-pressed="false">Mes</button><button type="button" data-range="year" aria-pressed="false">Año</button></div></div><div class="charts-grid"><article class="chart-card"><div class="chart-header"><div class="chart-icon temperature"><img class="thermometer-icon" src="assets/thermometer.svg" alt=""></div><div><span class="chart-label">TEMPERATURA</span><div class="chart-value"><strong id="temperature-value">—</strong><span>°C</span></div></div><div id="temperature-status" class="chart-status"></div></div><div id="temperature-chart" class="chart-area" role="img" aria-label="Gráfica histórica de temperatura"></div><div id="temperature-limits" class="chart-footer"></div></article><article class="chart-card"><div class="chart-header"><div class="chart-icon ph">pH</div><div><span class="chart-label">PH</span><div class="chart-value"><strong id="ph-value">—</strong></div></div><div id="ph-status" class="chart-status"></div></div><div id="ph-chart" class="chart-area" role="img" aria-label="Gráfica histórica de pH"></div><div id="ph-limits" class="chart-footer"></div></article><article class="chart-card"><div class="chart-header"><div class="chart-icon oxygen">O₂</div><div><span class="chart-label">SATURACIÓN DE OXÍGENO</span><div class="chart-value"><strong id="oxygen-value">—</strong><span>%</span></div></div><div id="oxygen-status" class="chart-status"></div></div><div id="oxygen-chart" class="chart-area" role="img" aria-label="Gráfica histórica de saturación de oxígeno"></div><div id="oxygen-limits" class="chart-footer"></div></article></div></section>
+
+        <section id="alertas" class="alerts-section"><div class="section-heading"><div><span class="section-kicker">ATENCIÓN REQUERIDA</span><h2>Alertas activas</h2></div><span id="alert-count" class="count-label"></span></div><div id="alert-list" class="alert-list"></div></section>
+        <section id="notificaciones" class="notifications-section"><div class="section-heading"><div><span class="section-kicker">REGISTRO DE AVISOS</span><h2>Historial de notificaciones</h2><p class="section-subtitle">Envíos de notificaciones por alerta informativa o cr&iacute;tica.</p></div><span id="notification-count" class="count-label"></span></div><div id="notification-list" class="notification-list"></div></section>
+        <footer class="footer"><div class="footer-heading"><strong>Un proyecto con el apoyo de</strong><span>AquaSmart Hub FP · Monitorización de tanques</span></div><div class="sponsor-logos" aria-label="Entidades patrocinadoras y colaboradoras"><img src="assets/logo_p1_mefpd.png" alt="Ministerio de Educación, Formación Profesional y Deportes"><img src="assets/logo_p2_rmcefe.png" alt="Región de Murcia, Consejería de Educación, Formación y Empleo"><img src="assets/logo_p3_ue.png" alt="Unión Europea"><img src="assets/logo_p4_pct.png" alt="CIFP Politécnico Cartagena"><img src="assets/logo_p4_mte.png" alt="IES Manuel Tárraga Escribano"><img src="assets/logo_p5_c3.png" alt="CIFP Carlos III Cartagena"><img src="assets/logo_p7_imida.png" alt="IMIDA"><img src="assets/logo_p8_ctn.png" alt="Centro Tecnológico Naval y del Mar"></div></footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

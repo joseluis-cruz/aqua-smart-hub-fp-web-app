@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#07142d">
+  <title>Configuración · AquaSmart Hub FP</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/settings.js" defer></script>
+  <script src="js/config.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegación principal">
+      <a class="brand" href="index.html#inicio" aria-label="AquaSmart Hub FP, inicio"><img class="brand-logo" src="assets/logo_proyecto.png" alt=""><span class="brand-name">Aqua<span class="brand-accent">Smart</span> Hub FP<small>CONTROL ACUÍCOLA</small></span></a>
+      <div class="side-label">ESPACIO DE TRABAJO</div>
+      <nav class="nav-list" aria-label="Secciones">
+        <a class="nav-item" href="index.html#inicio"><span>▦</span> Vista general</a>
+        <a class="nav-item" href="index.html#tanques"><span>◉</span> Tanques</a>
+        <a class="nav-item" href="index.html#historial"><span>⌁</span> Historial</a>
+        <a class="nav-item" href="index.html#alertas"><span>♧</span> Alertas</a>
+        <a class="nav-item" href="index.html#notificaciones"><span>✉</span> Notificaciones</a>
+        <a class="nav-item active" href="config.html" aria-current="page"><span>⚙</span> Configuración</a>
+      </nav>
+      <div class="sidebar-bottom"><span class="online-dot"></span> Monitorización de tanques <small>Parámetros de la instalación</small></div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar"><div class="breadcrumb">Instalación / <strong>Configuración</strong></div><a class="back-link" href="index.html#inicio">← Volver al panel</a></header>
+      <div class="page-content config-page">
+        <section class="welcome config-welcome"><div><div class="eyebrow">AQUASMART HUB FP <span class="eyebrow-line"></span> PARÁMETROS DE CONTROL</div><h1>Configuración<span>.</span></h1><p>Define los límites de alerta, la frecuencia de lectura y los destinatarios.</p></div><img class="welcome-logo" src="assets/logo_proyecto.png" alt="" aria-hidden="true"></section>
+
+        <form id="settings-form" novalidate>
+          <div class="config-intro"><div><span class="section-kicker">UMBRALES DE CONTROL</span><h2>Valores de alerta</h2><p>Una alerta informativa anticipa la llegada a un límite crítico.</p></div><div class="config-legend"><span class="legend-dot warning-dot"></span> Informativa <span class="legend-dot critical-dot"></span> Crítica</div></div>
+
+          <div class="config-grid threshold-grid">
+            <fieldset class="config-card"><legend><span class="config-icon temperature"><img class="thermometer-icon" src="assets/thermometer.svg" alt=""></span> Temperatura <small>°C</small></legend><p>Valores mínimos y máximos para los dos niveles de alerta.</p><div class="field-grid"><label> Mínimo informativo <input id="temperature-warning-min" type="number" inputmode="decimal" step="0.1" required></label><label> Máximo informativo <input id="temperature-warning-max" type="number" inputmode="decimal" step="0.1" required></label><label> Mínimo crítico <input id="temperature-critical-min" type="number" inputmode="decimal" step="0.1" required></label><label> Máximo crítico <input id="temperature-critical-max" type="number" inputmode="decimal" step="0.1" required></label></div><div class="config-reference">Rango habitual: 10–25 °C</div></fieldset>
+
+            <fieldset class="config-card"><legend><span class="config-icon ph">pH</span> pH</legend><p>Valores mínimos y máximos para los dos niveles de alerta.</p><div class="field-grid"><label> Mínimo informativo <input id="ph-warning-min" type="number" inputmode="decimal" step="0.1" required></label><label> Máximo informativo <input id="ph-warning-max" type="number" inputmode="decimal" step="0.1" required></label><label> Mínimo crítico <input id="ph-critical-min" type="number" inputmode="decimal" step="0.1" required></label><label> Máximo crítico <input id="ph-critical-max" type="number" inputmode="decimal" step="0.1" required></label></div><div class="config-reference">Rango habitual: 7,5–9</div></fieldset>
+
+            <fieldset class="config-card"><legend><span class="config-icon oxygen">O₂</span> Saturación de oxígeno <small>%</small></legend><p>Solo se generan alertas por valores inferiores a los mínimos.</p><div class="field-grid oxygen-fields"><label> Mínimo informativo <input id="oxygen-warning-min" type="number" inputmode="decimal" min="0" max="100" step="0.1" required></label><label> Mínimo crítico <input id="oxygen-critical-min" type="number" inputmode="decimal" min="0" max="100" step="0.1" required></label></div><div class="config-reference">Rango habitual: 10–100 % · Sin límite máximo de alerta</div></fieldset>
+          </div>
+
+          <div class="config-intro secondary-intro"><div><span class="section-kicker">ADQUISICIÓN Y AVISOS</span><h2>Lecturas y notificaciones</h2><p>Ajusta el intervalo entre lecturas y las direcciones destinatarias.</p></div></div>
+          <div class="config-grid"><section class="config-card"><div class="config-card-title"><span class="config-icon sampling">◷</span><h3>Frecuencia de muestreo</h3></div><p>Tiempo entre dos capturas consecutivas de las sondas.</p><label class="full-field">Intervalo de lectura<select id="sampling-minutes" required><option value="5">Cada 5 minutos</option><option value="10">Cada 10 minutos</option><option value="15">Cada 15 minutos</option><option value="30">Cada 30 minutos</option><option value="60">Cada 60 minutos</option></select></label></section><section class="config-card"><div class="config-card-title"><span class="config-icon mail">✉</span><h3>Correos de notificación</h3></div><p>Una dirección por línea o varias separadas por comas.</p><label class="full-field">Destinatarios<textarea id="notification-emails" rows="4" placeholder="nombre@dominio.es"></textarea></label></section></div>
+
+          <div class="form-actions"><p id="form-feedback" role="status" aria-live="polite">Los cambios se aplicarán al panel al volver a abrirlo.</p><button type="submit" class="save-button">Guardar configuración <span aria-hidden="true">→</span></button></div>
+        </form>
+
+        <footer class="footer"><div class="footer-heading"><strong>Un proyecto con el apoyo de</strong><span>AquaSmart Hub FP · Monitorización de tanques</span></div><div class="sponsor-logos" aria-label="Entidades patrocinadoras y colaboradoras"><img src="assets/logo_p1_mefpd.png" alt="Ministerio de Educación, Formación Profesional y Deportes"><img src="assets/logo_p2_rmcefe.png" alt="Región de Murcia, Consejería de Educación, Formación y Empleo"><img src="assets/logo_p3_ue.png" alt="Unión Europea"><img src="assets/logo_p4_pct.png" alt="CIFP Politécnico Cartagena"><img src="assets/logo_p4_mte.png" alt="IES Manuel Tárraga Escribano"><img src="assets/logo_p5_c3.png" alt="CIFP Carlos III Cartagena"><img src="assets/logo_p7_imida.png" alt="IMIDA"><img src="assets/logo_p8_ctn.png" alt="Centro Tecnológico Naval y del Mar"></div></footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
